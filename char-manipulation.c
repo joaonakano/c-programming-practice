@@ -140,3 +140,46 @@ int main()
    }
 */
 
+// ler um buffer string e verificar se o caractere pode ser um tab, new line ou espaco em branco, se for um dos casos anteriores, deve-se contabiliza-lo corretamente. Caso contrario, deve-se contabilizar o inicio de uma palavra e prosseguir ate que o proximo caractere seja um dos casos anteriormente citados.
+#define IS_WORD 1
+#define IS_NOT_WORD 0
+
+int teste() {
+   int c, nl, nw, nc, state;
+   nl = nw = nc = 0;
+
+   while ((c = getchar()) != EOF) {
+      nc++;
+      if (c == '\n') {
+         nl++;
+      }
+      if (c == '\n' || c == '\t' || c == ' ') {
+         state = IS_NOT_WORD;
+      } else if (state == IS_NOT_WORD) {
+         nw++;
+         state = IS_WORD;
+      }
+   }
+
+   printf("\nNew line count: %d\nWord count: %d\nCharacter count: %d", nl, nw, nc);
+}
+
+// Anotacoes legais: 1. Se iniciarmos o valor do estado para IN, ele nao contabiliza a primeira palavra. 2. Para definir constantes simbolicas, usamos a estrutura #define <nome_constate> <valor_constate> (sem ponto e virgula)
+
+// Write a program that prints its input one word per line
+int main() {
+   int c, state;
+
+   while ((c = getchar()) != EOF) {
+      if (c == '\n' || c == '\t' || c == ' ') {
+         putchar('\n');
+         state = IS_NOT_WORD;
+      }
+      
+      else if (state == IS_NOT_WORD)
+         state = IS_WORD;
+
+      if (state == IS_WORD)
+         putchar(c);
+   }
+}
