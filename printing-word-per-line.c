@@ -16,6 +16,9 @@ int main() {
 
 
 /* OG Code
+#include <stdio.h>
+#define IN 1
+#define OUT 0
 
 int main() {
     int c, state;
